@@ -1,0 +1,373 @@
+/* BDS + HAIKU Design System Implementation */
+/* Following 4-3-2-1 Framework with 60-30-10 Rule */
+
+:root {
+    /* Agent Colors */
+    --bigsis-color: #00A1F1;
+    --lilsis-color: #7E3AF2;
+    --bro-color: #FE5F00;
+    --cbo-color: #3EB85F;
+    --neutral: #393939;
+    --error: #EF4444;
+    
+    /* Typography */
+    --font-display: 'DM Sans', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    /* Base Unit (8px grid) */
+    --unit: 8px;
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+    --space-5: 40px;
+    --space-6: 48px;
+    --space-7: 56px;
+    --space-8: 64px;
+    
+    /* Type Scale */
+    --text-xs: 14px;
+    --text-sm: 16px;
+    --text-md: 24px;
+    --text-lg: 32px;
+    --text-xl: 48px;
+    
+    /* 60-30-10 Implementation */
+    --primary-opacity: 0.6;
+    --secondary-opacity: 0.3;
+    --accent-opacity: 0.1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Container - Following HAIKU minimal principle */
+.countdown-container {
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3);
+}
+
+/* Avatar Background Layer - 60% visual weight */
+.avatar-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    opacity: var(--primary-opacity);
+    overflow: hidden;
+}
+
+.avatar {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 6s cubic-bezier(0.4, 0, 0.2, 1),
+                filter 2.5s ease;
+    filter: contrast(1.1) brightness(1.05);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    will-change: opacity, transform;
+}
+
+.avatar.active {
+    opacity: 1;
+    transform: scale(1) translateZ(0);
+}
+
+.avatar.entering {
+    transform: scale(1.08) translateZ(0);
+}
+
+.avatar.leaving {
+    opacity: 0;
+    transform: scale(0.95) translateZ(0);
+    filter: contrast(0.9) brightness(0.9) blur(1px);
+}
+
+/* BroVerse ASCII Logo */
+.broverse-logo {
+    margin-bottom: var(--space-4);
+    display: flex;
+    justify-content: center;
+}
+
+.ascii-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    line-height: 1.2;
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.dollar-sign {
+    display: inline-block;
+    font-weight: 600;
+    animation: colorCycle 4s ease-in-out infinite, pulse 2s ease-in-out infinite;
+    text-shadow: 0 0 10px currentColor;
+}
+
+.vibes-text {
+    display: inline-block;
+    background: linear-gradient(90deg, 
+        var(--bigsis-color) 0%,
+        var(--lilsis-color) 25%,
+        var(--bro-color) 50%,
+        var(--cbo-color) 75%,
+        var(--bigsis-color) 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientFlow 8s ease-in-out infinite, breathe 4s ease-in-out infinite;
+    font-weight: 600;
+}
+
+@keyframes colorCycle {
+    0%, 100% { color: var(--bigsis-color); }
+    25% { color: var(--bro-color); }
+    50% { color: var(--lilsis-color); }
+    75% { color: var(--cbo-color); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+@keyframes gradientFlow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes breathe {
+    0%, 100% { 
+        opacity: 0.7;
+        filter: brightness(1);
+    }
+    50% { 
+        opacity: 1;
+        filter: brightness(1.2);
+    }
+}
+
+/* Content Layer - 30% visual weight */
+.content-layer {
+    position: relative;
+    z-index: 10;
+    background: rgba(25, 25, 25, 0.88);
+    backdrop-filter: blur(12px) saturate(1.2);
+    border-radius: var(--space-2);
+    padding: var(--space-4) var(--space-6) var(--space-6);
+    min-width: 650px;
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Header - Following HAIKU constraint */
+.countdown-header {
+    text-align: center;
+    margin-bottom: var(--space-5);
+}
+
+.title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    margin-bottom: var(--space-1);
+}
+
+.gradient-title {
+    background: linear-gradient(90deg, 
+        var(--bigsis-color) 0%,
+        var(--lilsis-color) 20%,
+        var(--bro-color) 40%,
+        var(--cbo-color) 60%,
+        var(--lilsis-color) 80%,
+        var(--bigsis-color) 100%);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 10s ease-in-out infinite, titleBreathe 5s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    33% { background-position: 50% 50%; }
+    66% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes titleBreathe {
+    0%, 100% { 
+        filter: brightness(0.9);
+        transform: scale(1);
+    }
+    50% { 
+        filter: brightness(1.2);
+        transform: scale(1.02);
+    }
+}
+
+.subtitle {
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 400;
+}
+
+/* Countdown Display - Maximum 3 constraints per element */
+.countdown-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-5);
+}
+
+.time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.time-value {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: var(--space-1);
+}
+
+.time-label {
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.time-separator {
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    color: rgba(255, 255, 255, 0.3);
+    margin: 0 var(--space-1);
+}
+
+/* Progress Bar - 10% accent weight */
+.progress-bar {
+    position: relative;
+    height: var(--space-1);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--space-1);
+    overflow: hidden;
+    margin-bottom: var(--space-4);
+}
+
+.progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--bigsis-color), var(--lilsis-color));
+    border-radius: var(--space-1);
+    transition: width 1s ease-out;
+    box-shadow: 0 0 20px rgba(126, 58, 242, 0.5);
+}
+
+.progress-text {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Footer - Agent Indicators */
+.countdown-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.agent-indicator {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.agent-dot {
+    width: var(--space-1);
+    height: var(--space-1);
+    border-radius: 50%;
+    opacity: 0.3;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.agent-dot.active {
+    opacity: 1;
+    transform: scale(1.5);
+}
+
+.bigsis-dot {
+    background: var(--bigsis-color);
+}
+
+.lilsis-dot {
+    background: var(--lilsis-color);
+}
+
+/* Responsive - Following 2 options principle */
+@media (max-width: 768px) {
+    .content-layer {
+        min-width: 90%;
+        padding: var(--space-4);
+    }
+    
+    .title {
+        font-size: var(--text-lg);
+    }
+    
+    .time-value {
+        font-size: var(--text-md);
+    }
+    
+    .time-unit {
+        min-width: 60px;
+    }
+}
+
+/* Animations - Flow principle */
+@keyframes pulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+.content-layer {
+    animation: pulse 4s ease-in-out infinite;
+}

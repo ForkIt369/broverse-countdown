@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BroVerse Countdown | Vibes To Value</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="countdown-container">
+        <!-- Avatar Background Layer -->
+        <div class="avatar-layer" id="avatar-layer">
+            <!-- Avatars will be dynamically added here -->
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content-layer">
+            <!-- BroVerse ASCII Logo -->
+            <div class="broverse-logo">
+                <pre class="ascii-logo">
+╔═══════════════════════════════════════════════╗
+║  ____             __     __                   ║
+║ | __ ) _ __ ___   \ \   / /__ _ __ ___  ___   ║
+║ |  _ \| '__/ _ \   \ \ / / _ \ '__/ __|/ _ \  ║
+║ | |_) | | | (_) |   \ V /  __/ |  \__ \  __/  ║
+║ |____/|_|  \___/     \_/ \___|_|  |___/\___|  ║
+║                                               ║
+║        <span class="dollar-sign">$</span> <span class="vibes-text">VIBES TO VALUE</span> <span class="dollar-sign">$</span>          ║
+╚═══════════════════════════════════════════════╝
+                </pre>
+            </div>
+            
+            <header class="countdown-header">
+                <h1 class="title gradient-title">Vibes To Value</h1>
+                <p class="subtitle">BroVerse Awakening</p>
+            </header>
+            
+            <div class="countdown-display">
+                <div class="time-unit">
+                    <span class="time-value" id="days">--</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-separator">:</div>
+                <div class="time-unit">
+                    <span class="time-value" id="hours">--</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-separator">:</div>
+                <div class="time-unit">
+                    <span class="time-value" id="minutes">--</span>
+                    <span class="time-label">Minutes</span>
+                </div>
+                <div class="time-separator">:</div>
+                <div class="time-unit">
+                    <span class="time-value" id="seconds">--</span>
+                    <span class="time-label">Seconds</span>
+                </div>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+                <span class="progress-text" id="progress-text">Loading...</span>
+            </div>
+            
+            <footer class="countdown-footer">
+                <div class="agent-indicator">
+                    <span class="agent-dot bigsis-dot active"></span>
+                    <span class="agent-dot lilsis-dot"></span>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    <script src="js/countdown.js"></script>
+</body>
+</html>
